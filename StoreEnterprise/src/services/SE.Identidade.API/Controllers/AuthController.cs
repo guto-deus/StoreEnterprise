@@ -5,6 +5,7 @@ using static SE.Identidade.API.Models.UserViewModels;
 
 namespace SE.Identidade.API.Controllers
 {
+    [ApiController]
     [Route("api/identidade")]
     public class AuthController : Controller
     {
