@@ -15,21 +15,24 @@ namespace SE.WebApp.MVC.Services
             _httpClient = httpClient;
         }
 
-        public async Task<string> Login(UsuarioLogin usuarioLogin)
+        public async Task<UsuarioRespostaLogin> Login(UsuarioLogin usuarioLogin)
         {
             var loginContent = new StringContent(
                 JsonSerializer.Serialize(usuarioLogin),
                 Encoding.UTF8,
                 "application/json");
 
-            var response = await _httpClient.PostAsync(requestUri:"https://localhost:44391/api/identidade/autenticar", loginContent);
+            var response = await _httpClient.PostAsync(requestUri: "https://localhost:44391/api/identidade/autenticar", loginContent);
 
-            var teste = await response.Content.ReadAsStringAsync();
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            };
 
-            return JsonSerializer.Deserialize<string>(await response.Content.ReadAsStringAsync());
+            return JsonSerializer.Deserialize<UsuarioRespostaLogin>(await response.Content.ReadAsStringAsync(),options);
         }
 
-        public async Task<string> Registro(UsuarioRegistro usuarioRegistro)
+        public async Task<UsuarioRespostaLogin> Registro(UsuarioRegistro usuarioRegistro)
         {
             var registroContent = new StringContent(
                 JsonSerializer.Serialize(usuarioRegistro),
@@ -38,7 +41,7 @@ namespace SE.WebApp.MVC.Services
 
             var response = await _httpClient.PostAsync("https://localhost:44391/api/identidade/nova-conta", registroContent);
 
-            return JsonSerializer.Deserialize<string>(await response.Content.ReadAsStringAsync());
+            return JsonSerializer.Deserialize<UsuarioRespostaLogin>(await response.Content.ReadAsStringAsync());
         }
     }
 }
