@@ -132,7 +132,7 @@ namespace SE.Identidade.API.Controllers
         {
             return new UsuarioRespostaLogin
             {
-                AcessarToken = encodedToken,
+                AcessToken = encodedToken,
                 ExpiresIn = TimeSpan.FromHours(_appSettings.ExpiracaoHoras).TotalSeconds,
                 UsuarioToken = new UsuarioToken
                 {

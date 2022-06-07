@@ -33,7 +33,7 @@ namespace SE.Identidade.API.Models
 
         public class UsuarioRespostaLogin
         {
-            public string AcessarToken { get; set; }
+            public string AcessToken { get; set; }
             public double ExpiresIn { get; set; }
             public UsuarioToken UsuarioToken { get; set; }
         }

@@ -24,6 +24,8 @@ namespace SE.WebApp.MVC.Services
 
             var response = await _httpClient.PostAsync(requestUri: "https://localhost:44391/api/identidade/autenticar", loginContent);
 
+            var teste = await response.Content.ReadAsStringAsync();
+
             var options = new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true
